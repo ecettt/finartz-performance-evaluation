@@ -6,6 +6,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.finartz.userregistration.entity.Evaluation;
+import com.finartz.userregistration.exception.ResourceNotFoundException;
 import com.finartz.userregistration.repository.EvaluationRepository;
 import com.finartz.userregistration.request.CreateEvaluationRequest;
 import com.finartz.userregistration.service.EvaluationService;
@@ -35,6 +36,12 @@ public class EvaluationServiceImpl implements EvaluationService{
     @Override
     public Page<Evaluation> getEvaluations(Pageable pageable) {
         return evaluationRepository.findAll(pageable);
+    }
+
+    @Override
+    public void deleteEvaluation(Long id) {
+        evaluationRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Evaluation not found with id: " + id));
+        evaluationRepository.deleteById(id);
     }
     
 }
