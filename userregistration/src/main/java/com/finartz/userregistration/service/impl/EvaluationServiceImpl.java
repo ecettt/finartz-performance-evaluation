@@ -1,6 +1,8 @@
 package com.finartz.userregistration.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.finartz.userregistration.entity.Evaluation;
@@ -28,6 +30,11 @@ public class EvaluationServiceImpl implements EvaluationService{
 
         evaluationRepository.save(evaluation);
         return evaluation;
+    }
+
+    @Override
+    public Page<Evaluation> getEvaluations(Pageable pageable) {
+        return evaluationRepository.findAll(pageable);
     }
     
 }
