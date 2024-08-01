@@ -43,5 +43,19 @@ public class EvaluationServiceImpl implements EvaluationService{
         evaluationRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Evaluation not found with id: " + id));
         evaluationRepository.deleteById(id);
     }
+
+    @Override
+    public Evaluation editEvaluation(Long id, CreateEvaluationRequest createEvaluationRequest) {
+        Evaluation updatedEvaluation = evaluationRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Evaluation not found with id: " + id));
+        updatedEvaluation.setTermName(createEvaluationRequest.getTermName());
+        updatedEvaluation.setInternalEvaluation(createEvaluationRequest.getInternalEvaluation());
+        updatedEvaluation.setEvaluationName(createEvaluationRequest.getEvaluationName());
+        updatedEvaluation.setStartDate(createEvaluationRequest.getStartDate());
+        updatedEvaluation.setEndDate(createEvaluationRequest.getEndDate());
+        updatedEvaluation.setEmail(createEvaluationRequest.getEmail());
+        updatedEvaluation.setPhone(createEvaluationRequest.getPhone());
+
+        return evaluationRepository.save(updatedEvaluation);
+    }
     
 }

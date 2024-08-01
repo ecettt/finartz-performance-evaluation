@@ -11,4 +11,5 @@ public interface EvaluationService {
     Evaluation saveEvaluation(CreateEvaluationRequest evaluationRequest);
     Page<Evaluation> getEvaluations(Pageable pageable);
     public void deleteEvaluation(Long id);
+    public Evaluation editEvaluation(Long id, CreateEvaluationRequest evaluationRequest);
 }

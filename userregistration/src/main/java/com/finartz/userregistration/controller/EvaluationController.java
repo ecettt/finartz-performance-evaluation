@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -42,5 +43,12 @@ public class EvaluationController {
     public ResponseEntity<String> deleteEvaluation(@PathVariable Long evaluationId) {
         evaluationService.deleteEvaluation(evaluationId);
         return ResponseEntity.ok("Evaluation deleted!");
+    }
+
+    @PutMapping("editEvaluation/{evaluationId}")
+    public ResponseEntity<Evaluation> editEvaluation(@PathVariable Long evaluationId, @RequestBody CreateEvaluationRequest createEvaluationRequest) {
+        Evaluation updatedEvaluation = evaluationService.editEvaluation(evaluationId, createEvaluationRequest);
+        
+        return ResponseEntity.ok(updatedEvaluation);
     }
 }
