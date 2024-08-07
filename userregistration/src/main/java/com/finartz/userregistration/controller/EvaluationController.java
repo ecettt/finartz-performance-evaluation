@@ -27,7 +27,7 @@ public class EvaluationController {
     @Autowired
     private EvaluationService evaluationService;
 
-    @PostMapping("/save")
+    @PostMapping
     public ResponseEntity<Evaluation> saveEvaluation(@Valid @RequestBody CreateEvaluationRequest evaluationRequest) {
         return ResponseEntity.ok(evaluationService.saveEvaluation(evaluationRequest));
     }
@@ -39,13 +39,13 @@ public class EvaluationController {
             return evaluationService.getEvaluations(pageable);
         }
 
-    @DeleteMapping("/deleteEvaluation/{evaluationId}")
+    @DeleteMapping("/{evaluationId}")
     public ResponseEntity<String> deleteEvaluation(@PathVariable Long evaluationId) {
         evaluationService.deleteEvaluation(evaluationId);
         return ResponseEntity.ok("Evaluation deleted!");
     }
 
-    @PutMapping("editEvaluation/{evaluationId}")
+    @PutMapping("/{evaluationId}")
     public ResponseEntity<Evaluation> editEvaluation(@PathVariable Long evaluationId, @RequestBody CreateEvaluationRequest createEvaluationRequest) {
         Evaluation updatedEvaluation = evaluationService.editEvaluation(evaluationId, createEvaluationRequest);
         

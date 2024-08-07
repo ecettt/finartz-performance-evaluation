@@ -1,6 +1,5 @@
 package com.finartz.userregistration.request;
 
-import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -15,5 +14,4 @@ public class CreateCompetencyRequest {
     private String name;
     private String description;
     private Long evaluationId;
-    private List<CreateQuestionRequest> questionList;
 }

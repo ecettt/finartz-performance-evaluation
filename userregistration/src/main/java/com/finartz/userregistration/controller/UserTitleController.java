@@ -22,7 +22,7 @@ public class UserTitleController {
     @Autowired
     private UserTitleService userTitleService;
 
-    @PostMapping("/create")
+    @PostMapping
     public ResponseEntity<UserTitle> createUserTitle(@Valid @RequestBody TitleRequest titleRequest) {
         UserTitle userTitle = userTitleService.createUserTitle(titleRequest.getTitle());
         return ResponseEntity.ok(userTitle);

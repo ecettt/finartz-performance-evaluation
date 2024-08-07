@@ -1,10 +1,6 @@
 package com.finartz.userregistration.entity;
 
 
-import java.util.List;
-
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -12,7 +8,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
@@ -39,8 +34,4 @@ public class Competency {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "evaluation_id")
     private Evaluation evaluation;
-
-    @OneToMany(mappedBy = "competency", cascade = CascadeType.ALL)
-    @JsonManagedReference
-    private List<Question> questionList;
 }
