@@ -1,7 +1,13 @@
 package com.finartz.userregistration.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,5 +26,17 @@ public class QuestionController {
     @PostMapping("/competencies/questions")
     public ResponseEntity<Question> saveQuestion(@RequestBody CreateQuestionRequest questionRequest) {
         return ResponseEntity.ok(questionService.saveQuestion(questionRequest));
+    }
+
+    @GetMapping("/competencies/{competencyId}/questions")
+    public ResponseEntity<List<Question>> getQuestionsByCompetencyId(@PathVariable Long competencyId){
+        return ResponseEntity.ok(questionService.getQuestionsByCompetencyId(competencyId));
+    }
+
+
+    @DeleteMapping("competencies/questions/{questionId}")
+    public ResponseEntity<String> deletQuestion(@PathVariable Long questionId) {
+        questionService.deleteQuestion(questionId);
+        return ResponseEntity.status(HttpStatus.OK).body("Question deleted!");
     }
 }

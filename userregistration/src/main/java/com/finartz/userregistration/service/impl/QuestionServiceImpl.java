@@ -1,10 +1,13 @@
 package com.finartz.userregistration.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.finartz.userregistration.entity.Competency;
 import com.finartz.userregistration.entity.Question;
+import com.finartz.userregistration.exception.ResourceNotFoundException;
 import com.finartz.userregistration.repository.CompetencyRepository;
 import com.finartz.userregistration.repository.QuestionRepository;
 import com.finartz.userregistration.request.CreateQuestionRequest;
@@ -29,5 +32,21 @@ public class QuestionServiceImpl implements QuestionService{
         .build();
 
         return questionRepository.save(question);
+    }
+
+    @Override
+    public List<Question> getQuestionsByCompetencyId(Long id) {
+        return questionRepository.findByCompetencyId(id);
     } 
+
+    @Override
+    public void deleteQuestion(Long id) {
+       Question question = questionRepository.findById(id)
+            .orElseThrow(() -> new ResourceNotFoundException("Question not found with id: " + id));
+
+        questionRepository.delete(question);
+    }
+
+   
+
 }
