@@ -13,4 +13,5 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class CreateQuestionRequest {
     private String content;
+    private Long competencyId;
 }

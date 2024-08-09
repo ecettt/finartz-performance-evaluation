@@ -1,6 +1,9 @@
 package com.finartz.userregistration.entity;
 
 
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -31,5 +34,6 @@ public class Question {
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "competency_id")
+    @JsonBackReference
     private Competency competency;
 }

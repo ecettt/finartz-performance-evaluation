@@ -26,20 +26,27 @@ public class CompetencyServiceImpl implements CompetencyService{
     public Competency saveCompetency(CreateCompetencyRequest competencyRequest) {
         Evaluation evaluation = evaluationRepository.findById(competencyRequest.getEvaluationId()).orElseThrow(() -> new RuntimeException("Evaluation not found"));
 
-        Competency competencyIn = Competency.builder()
+        Competency competency = Competency.builder()
         .name(competencyRequest.getName())
         .description(competencyRequest.getDescription())
         .evaluation(evaluation)
         .build();
 
-        return competencyRepository.save(competencyIn);
+        // evaluation.getCompetencies().add(competency);
+        // evaluationRepository.save(evaluation);
+
+        return competencyRepository.save(competency);
     }
 
     @Override
     public void deleteCompetency(Long id) {
-        competencyRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Competency not found with id: " + id));
-        competencyRepository.deleteById(id);
+        Competency competency = competencyRepository.findById(id)
+            .orElseThrow(() -> new ResourceNotFoundException("Competency not found with id: " + id));
+
+        competencyRepository.delete(competency);
     }
+
+
 
     @Override
     public List<Competency> getAllCompetencies() {
