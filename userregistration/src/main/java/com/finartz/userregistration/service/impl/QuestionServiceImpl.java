@@ -47,6 +47,18 @@ public class QuestionServiceImpl implements QuestionService{
         questionRepository.delete(question);
     }
 
+    @Override
+    public Question updateQuestion(Long id, CreateQuestionRequest questionRequest) {
+        Question updatedQuestion = questionRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Question not found with id: " + id));
+        updatedQuestion.setContent(questionRequest.getContent());
+
+        Competency competency = competencyRepository.findById(questionRequest.getCompetencyId()).orElseThrow(() -> new ResourceNotFoundException("Competency not found with id: " + id));
+
+        updatedQuestion.setCompetency(competency);
+
+        return questionRepository.save(updatedQuestion);
+    }
+
    
 
 }

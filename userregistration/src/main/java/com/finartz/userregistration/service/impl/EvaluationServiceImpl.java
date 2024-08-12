@@ -45,7 +45,7 @@ public class EvaluationServiceImpl implements EvaluationService{
     }
 
     @Override
-    public Evaluation editEvaluation(Long id, CreateEvaluationRequest createEvaluationRequest) {
+    public Evaluation updateEvaluation(Long id, CreateEvaluationRequest createEvaluationRequest) {
         Evaluation updatedEvaluation = evaluationRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Evaluation not found with id: " + id));
         updatedEvaluation.setTermName(createEvaluationRequest.getTermName());
         updatedEvaluation.setInternalEvaluation(createEvaluationRequest.getInternalEvaluation());

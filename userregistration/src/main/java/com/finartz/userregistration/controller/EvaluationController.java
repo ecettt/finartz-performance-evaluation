@@ -46,9 +46,7 @@ public class EvaluationController {
     }
 
     @PutMapping("/{evaluationId}")
-    public ResponseEntity<Evaluation> editEvaluation(@PathVariable Long evaluationId, @RequestBody CreateEvaluationRequest createEvaluationRequest) {
-        Evaluation updatedEvaluation = evaluationService.editEvaluation(evaluationId, createEvaluationRequest);
-        
-        return ResponseEntity.ok(updatedEvaluation);
+    public ResponseEntity<Evaluation> updateEvaluation(@PathVariable Long evaluationId, @RequestBody CreateEvaluationRequest createEvaluationRequest) {
+        return ResponseEntity.ok(evaluationService.updateEvaluation(evaluationId, createEvaluationRequest));
     }
 }
