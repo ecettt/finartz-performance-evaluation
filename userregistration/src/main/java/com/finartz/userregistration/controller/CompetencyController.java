@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 
@@ -33,6 +34,12 @@ public class CompetencyController {
     @GetMapping
     public ResponseEntity<List<Competency>> getAllCompetencies() {
         return ResponseEntity.ok(competencyService.getAllCompetencies());
+    }
+
+
+    @PutMapping("/{competencyId}")
+    public ResponseEntity<Competency> updateCompetency(@PathVariable Long competencyId, @RequestBody CreateCompetencyRequest competencyRequest) {
+        return ResponseEntity.status(HttpStatus.OK).body(competencyService.updateCompetency(competencyId, competencyRequest));
     }
 
     @DeleteMapping("/{competencyId}")

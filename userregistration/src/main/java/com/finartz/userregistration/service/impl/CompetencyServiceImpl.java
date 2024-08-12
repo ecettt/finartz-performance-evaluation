@@ -47,9 +47,21 @@ public class CompetencyServiceImpl implements CompetencyService{
     }
 
 
-
     @Override
     public List<Competency> getAllCompetencies() {
         return competencyRepository.findAll();
+    }
+
+    @Override
+    public Competency updateCompetency(Long id, CreateCompetencyRequest competencyRequest) {
+        Competency updatedCompetency = competencyRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Competency not found with id: " + id));
+
+        Evaluation evaluation = evaluationRepository.findById(competencyRequest.getEvaluationId()).orElseThrow(() -> new ResourceNotFoundException("Evaluation not found with id: " + id));
+
+        updatedCompetency.setName(competencyRequest.getName());
+        updatedCompetency.setDescription(competencyRequest.getDescription());
+        updatedCompetency.setEvaluation(evaluation);
+
+        return competencyRepository.save(updatedCompetency);
     }
 }
