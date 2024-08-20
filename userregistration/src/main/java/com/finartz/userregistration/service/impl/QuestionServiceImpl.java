@@ -24,7 +24,8 @@ public class QuestionServiceImpl implements QuestionService{
 
     @Override
     public Question saveQuestion(CreateQuestionRequest questionRequest) {
-        Competency competency = competencyRepository.findById(questionRequest.getCompetencyId()).orElseThrow(() -> new RuntimeException("Competency not found"));
+        Long competencyId = questionRequest.getCompetencyId();
+        Competency competency = competencyRepository.findById(competencyId).orElseThrow(() -> new ResourceNotFoundException("Competency not found with id: " + competencyId));
 
         Question question = Question.builder()
         .content(questionRequest.getContent())

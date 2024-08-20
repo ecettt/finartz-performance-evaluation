@@ -28,7 +28,8 @@ public class QuestionOptionServiceImpl implements QuestionOptionService{
 
     @Override
     public void saveQuestionOption(CreateQuestionOptionRequest request) {
-        Question question = questionRepository.findById(request.getQuestionId()).orElseThrow(() -> new ResourceNotFoundException("Question not found with id: " + request.getQuestionId()));
+        Long questionId = request.getQuestionId();
+        Question question = questionRepository.findById(questionId).orElseThrow(() -> new ResourceNotFoundException("Question not found with id: " + questionId));
 
         Option option = optionRepository.findById(request.getOptionId())
                 .orElseThrow(() -> new ResourceNotFoundException("Option not found with id: " + request.getOptionId()));

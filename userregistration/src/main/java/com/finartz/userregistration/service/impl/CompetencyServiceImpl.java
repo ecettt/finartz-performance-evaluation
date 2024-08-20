@@ -24,16 +24,14 @@ public class CompetencyServiceImpl implements CompetencyService{
 
     @Override
     public Competency saveCompetency(CreateCompetencyRequest competencyRequest) {
-        Evaluation evaluation = evaluationRepository.findById(competencyRequest.getEvaluationId()).orElseThrow(() -> new RuntimeException("Evaluation not found"));
+        Long evaluationId = competencyRequest.getEvaluationId();
+        Evaluation evaluation = evaluationRepository.findById(evaluationId).orElseThrow(() -> new ResourceNotFoundException("Evaluation not found with id: " + evaluationId));
 
         Competency competency = Competency.builder()
         .name(competencyRequest.getName())
         .description(competencyRequest.getDescription())
         .evaluation(evaluation)
         .build();
-
-        // evaluation.getCompetencies().add(competency);
-        // evaluationRepository.save(evaluation);
 
         return competencyRepository.save(competency);
     }
