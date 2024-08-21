@@ -23,6 +23,16 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<ErrorMessage>(message, HttpStatus.NOT_FOUND);
     } 
 
+    @ExceptionHandler(UserAlreadyExistsException.class) 
+    public ResponseEntity<ErrorMessage> handleUserAlreadyExists(UserAlreadyExistsException ex, WebRequest request) {
+        ErrorMessage message = new ErrorMessage(HttpStatus.CONFLICT.value(),
+        new Date(),
+        ex.getMessage(),
+        request.getDescription(false));
+
+        return new ResponseEntity<ErrorMessage>(message, HttpStatus.CONFLICT);
+    }
+
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorMessage> globalExceptionHandler(Exception ex, WebRequest request) {
         ErrorMessage message = new ErrorMessage(

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.finartz.userregistration.entity.Role;
 import com.finartz.userregistration.entity.User;
+import com.finartz.userregistration.exception.UserAlreadyExistsException;
 import com.finartz.userregistration.repository.UserRepository;
 import com.finartz.userregistration.request.LoginRequest;
 import com.finartz.userregistration.request.RegisterRequest;
@@ -29,7 +30,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     public JwtAuthenticationResponse register(RegisterRequest request) {
         //Check if a user with the provided email already exists
         if(userRepository.findByEmail(request.getEmail()).isPresent()) {
-            throw new IllegalArgumentException("User with this email already exists.");
+            throw new UserAlreadyExistsException("User with this email already exists.");
         }
 
         //Create a new user
