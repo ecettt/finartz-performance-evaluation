@@ -33,6 +33,19 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<ErrorMessage>(message, HttpStatus.CONFLICT);
     }
 
+    @ExceptionHandler(UserNotRegisteredException.class)
+    public ResponseEntity<ErrorMessage> handleUserNotRegistered(UserNotRegisteredException ex, WebRequest request) {
+        ErrorMessage message = new ErrorMessage(
+            HttpStatus.UNAUTHORIZED.value(),
+            new Date(),
+            ex.getMessage(),
+            request.getDescription(false)
+        );
+        
+        return new ResponseEntity<ErrorMessage>(message, HttpStatus.UNAUTHORIZED);
+    } 
+
+
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorMessage> globalExceptionHandler(Exception ex, WebRequest request) {
         ErrorMessage message = new ErrorMessage(
