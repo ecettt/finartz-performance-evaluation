@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import com.finartz.userregistration.entity.Role;
 import com.finartz.userregistration.entity.User;
 import com.finartz.userregistration.exception.UserAlreadyExistsException;
-import com.finartz.userregistration.exception.UserNotRegisteredException;
 import com.finartz.userregistration.repository.UserRepository;
 import com.finartz.userregistration.request.LoginRequest;
 import com.finartz.userregistration.request.RegisterRequest;
@@ -50,12 +49,11 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     @Override
     public JwtAuthenticationResponse login(LoginRequest request) {
-        var user = userRepository.findByEmail(request.getEmail()).orElseThrow(() -> new UserNotRegisteredException("User with this email is not registered."));
-        
         authenticationManager.authenticate(
             new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword())
         );
 
+        var user = userRepository.findByEmail(request.getEmail()).orElseThrow(() -> new IllegalArgumentException("Invalid email or password"));
         var jwt = jwtService.generateToken(user);
         return JwtAuthenticationResponse.builder().token(jwt).build();
     }
