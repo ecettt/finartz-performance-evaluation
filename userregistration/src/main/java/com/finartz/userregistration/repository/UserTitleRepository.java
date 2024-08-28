@@ -7,6 +7,6 @@ import com.finartz.userregistration.entity.UserTitle;
 
 
 @Repository
-public interface UserTitleRepository extends JpaRepository<UserTitle, Long>{
+public interface UserTitleRepository extends JpaRepository<UserTitle, Integer>{
     
 }

@@ -20,7 +20,7 @@ import lombok.NoArgsConstructor;
 public class UserTitle {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private int id;
 
     @NotBlank
     private String title;
