@@ -50,6 +50,9 @@ public class User implements UserDetails {
     @JoinColumn(name = "title_id")
     private UserTitle userTitle;
 
+    @Column(nullable = false, columnDefinition = "boolean default true")
+    private boolean isActive = true;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority(role.name()));
