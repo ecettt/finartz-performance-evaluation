@@ -38,7 +38,9 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests(request -> 
                                 request
                                 .requestMatchers("/api/auth/**")
-                                .permitAll()
+                                .permitAll() // allow all to access auth endpoints
+                                .requestMatchers("/api/employee/**")
+                                .hasAuthority("ADMIN") // only admins can access this endpoint
                                 .anyRequest()
                                 .authenticated())
                 .sessionManagement(manager -> manager.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

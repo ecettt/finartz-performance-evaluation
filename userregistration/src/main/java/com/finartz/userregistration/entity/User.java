@@ -34,7 +34,6 @@ public class User implements UserDetails {
     @NotBlank(message = "Last name must not be blank")
     private String lastName;
 
-    @NotBlank
     @Size(min = 8, message = "Password must be at least 8 characters long")
     private String password;
 

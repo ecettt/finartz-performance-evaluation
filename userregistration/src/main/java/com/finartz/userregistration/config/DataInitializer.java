@@ -26,7 +26,7 @@ public class DataInitializer implements CommandLineRunner{
 
     private void createUser(String firstName, String lastName, String email, String password, Role role) {
         String encodedPassword = passwordEncoder.encode(password);
-        
+
         User user = User.builder()
         .firstName(firstName)
         .lastName(lastName)
@@ -36,6 +36,5 @@ public class DataInitializer implements CommandLineRunner{
         .build();
 
         userRepository.save(user);
-    }
-    
+    } 
 }
