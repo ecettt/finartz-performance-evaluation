@@ -46,8 +46,8 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    @OneToOne
-    @JoinColumn(name = "user_title_id")
+    @ManyToOne
+    @JoinColumn(name = "title_id")
     private UserTitle userTitle;
 
     @Override
