@@ -15,20 +15,20 @@ public class UserTitleInitializer implements CommandLineRunner{
     @Override
     public void run(String... args) throws Exception {
         if (userTitleRepository.count() == 0) {
-            userTitleRepository.save(new UserTitle(1, "Product Manager"));
-            userTitleRepository.save(new UserTitle(2, "Product Manager Intern"));
-            userTitleRepository.save(new UserTitle(3, "Backend Developer"));
-            userTitleRepository.save(new UserTitle(4, "Backend Developer Intern"));
-            userTitleRepository.save(new UserTitle(5, "Frontend Developer"));
-            userTitleRepository.save(new UserTitle(6, "Backend Developer Intern"));
-            userTitleRepository.save(new UserTitle(7, "Test Engineer"));
-            userTitleRepository.save(new UserTitle(8, "Test Engineer Intern"));
-            userTitleRepository.save(new UserTitle(9, "DevOps Engineer"));
-            userTitleRepository.save(new UserTitle(10, "Lead Product Manager"));
-            userTitleRepository.save(new UserTitle(11, "Software Development Director"));
-            userTitleRepository.save(new UserTitle(12, "CTBO"));
-            userTitleRepository.save(new UserTitle(13, "Software Development Team Lead"));
-            userTitleRepository.save(new UserTitle(14, "UI/UX Designer"));
+            userTitleRepository.save(UserTitle.builder().title("Product Manager").build());
+            userTitleRepository.save(UserTitle.builder().title("Product Manager Intern").build());
+            userTitleRepository.save(UserTitle.builder().title("Backend Developer").build());
+            userTitleRepository.save(UserTitle.builder().title("Backend Developer Intern").build());
+            userTitleRepository.save(UserTitle.builder().title("Frontend Developer").build());
+            userTitleRepository.save(UserTitle.builder().title("Backend Developer Intern").build());
+            userTitleRepository.save(UserTitle.builder().title("Test Engineer").build());
+            userTitleRepository.save(UserTitle.builder().title("Test Engineer Intern").build());
+            userTitleRepository.save(UserTitle.builder().title("DevOps Engineer").build());
+            userTitleRepository.save(UserTitle.builder().title("Lead Product Manager").build());
+            userTitleRepository.save(UserTitle.builder().title("Software Development Director").build());
+            userTitleRepository.save(UserTitle.builder().title("CTBO").build());
+            userTitleRepository.save(UserTitle.builder().title("Software Development Team Lead").build());
+            userTitleRepository.save(UserTitle.builder().title("UI/UX Designer").build());
         }
     }
 }
