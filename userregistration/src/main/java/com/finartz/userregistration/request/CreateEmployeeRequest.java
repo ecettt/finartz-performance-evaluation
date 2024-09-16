@@ -14,4 +14,5 @@ public class CreateEmployeeRequest {
     private String lastName;
     private String email;
     private Long userTitleId;
+    private boolean isActive;
 }

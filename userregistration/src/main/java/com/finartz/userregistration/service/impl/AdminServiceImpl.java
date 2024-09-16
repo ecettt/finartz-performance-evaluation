@@ -6,10 +6,12 @@ import org.springframework.stereotype.Service;
 import com.finartz.userregistration.entity.Role;
 import com.finartz.userregistration.entity.User;
 import com.finartz.userregistration.entity.UserTitle;
+import com.finartz.userregistration.exception.ResourceNotFoundException;
 import com.finartz.userregistration.exception.UserAlreadyExistsException;
 import com.finartz.userregistration.repository.UserRepository;
 import com.finartz.userregistration.repository.UserTitleRepository;
 import com.finartz.userregistration.request.CreateEmployeeRequest;
+import com.finartz.userregistration.request.UpdateEmployeeStatusRequest;
 import com.finartz.userregistration.service.AdminService;
 
 @Service
@@ -37,8 +39,20 @@ public class AdminServiceImpl implements AdminService{
         .password(null)
         .role(Role.USER)
         .userTitle(userTitle)
+        .isActive(true)
         .build();
 
         userRepository.save(employee);
     }
+
+    @Override
+    public User updateIsActive(Long userId, UpdateEmployeeStatusRequest request) {
+        User user = userRepository.findById(userId).orElseThrow(() -> new ResourceNotFoundException("User not found with id " + userId));
+
+        user.setActive(request.isActive());
+        System.out.println("User status: " + request.isActive());
+        return userRepository.save(user);  
+    }
+
+    
 }

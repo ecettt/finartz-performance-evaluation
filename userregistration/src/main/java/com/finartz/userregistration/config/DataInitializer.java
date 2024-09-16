@@ -20,11 +20,11 @@ public class DataInitializer implements CommandLineRunner{
     @Override
     public void run(String... args) throws Exception {
         if(userRepository.count() == 0) {
-            createUser("Admin", "admin", "example@finartz.com", "12345", Role.ADMIN);
+            createUser("Admin", "admin", "example@finartz.com", "12345", Role.ADMIN, true);
         }
     }
 
-    private void createUser(String firstName, String lastName, String email, String password, Role role) {
+    private void createUser(String firstName, String lastName, String email, String password, Role role, boolean isActive) {
         String encodedPassword = passwordEncoder.encode(password);
 
         User user = User.builder()
@@ -33,6 +33,7 @@ public class DataInitializer implements CommandLineRunner{
         .email(email)
         .password(encodedPassword)
         .role(role)
+        .isActive(isActive)
         .build();
 
         userRepository.save(user);

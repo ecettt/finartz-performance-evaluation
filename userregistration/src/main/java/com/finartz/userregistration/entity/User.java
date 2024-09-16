@@ -49,8 +49,8 @@ public class User implements UserDetails {
     @JoinColumn(name = "title_id")
     private UserTitle userTitle;
 
-    @Column(nullable = false, columnDefinition = "boolean default true")
-    private boolean isActive = true;
+    @Column(nullable = false)
+    private boolean isActive;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
