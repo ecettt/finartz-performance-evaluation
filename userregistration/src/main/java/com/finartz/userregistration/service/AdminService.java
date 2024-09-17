@@ -6,5 +6,5 @@ import com.finartz.userregistration.request.UpdateEmployeeStatusRequest;
 
 public interface AdminService {
     void addEmployee(CreateEmployeeRequest request);
-    User updateIsActive(Long userId, UpdateEmployeeStatusRequest request);
+    User updateIsActive(UpdateEmployeeStatusRequest request);
 }

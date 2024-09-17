@@ -46,8 +46,8 @@ public class AdminServiceImpl implements AdminService{
     }
 
     @Override
-    public User updateIsActive(Long userId, UpdateEmployeeStatusRequest request) {
-        User user = userRepository.findById(userId).orElseThrow(() -> new ResourceNotFoundException("User not found with id " + userId));
+    public User updateIsActive(UpdateEmployeeStatusRequest request) {
+        User user = userRepository.findById(request.getUserId()).orElseThrow(() -> new ResourceNotFoundException("User not found with id " + request.getUserId()));
 
         user.setActive(request.isActive());
         System.out.println("User status: " + request.isActive());

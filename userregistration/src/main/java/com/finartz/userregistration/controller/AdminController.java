@@ -26,9 +26,9 @@ public class AdminController {
         return ResponseEntity.ok("Employee added.");
     }
 
-    @PutMapping("/{employeeId}/status")
-    public ResponseEntity<User> updateIsActive(@PathVariable Long employeeId, @RequestBody UpdateEmployeeStatusRequest request) {
-        User updatedUser = adminService.updateIsActive(employeeId, request);
+    @PutMapping("/status")
+    public ResponseEntity<User> updateIsActive(@RequestBody UpdateEmployeeStatusRequest request) {
+        User updatedUser = adminService.updateIsActive(request);
         return ResponseEntity.ok(updatedUser);
     }
 }
